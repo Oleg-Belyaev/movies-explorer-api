@@ -1,8 +1,9 @@
 const { isCelebrateError } = require('celebrate');
+const NotFoundError = require('../errors/not-found-error');
 const ValidationError = require('../errors/validation-error');
 
-const notFoundErrorHandler = (req, res) => {
-  res.status(404).json({ message: 'Запрашиваемый ресурс не найден' });
+const notFoundErrorHandler = () => {
+  throw new NotFoundError('Запрашиваемый ресурс не найден');
 };
 
 const celebrateErrorHandler = (err, req, res, next) => {

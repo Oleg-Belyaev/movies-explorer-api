@@ -44,9 +44,10 @@ const deleteMovie = (req, res, next) => {
   Movie.findById(req.params.movieId)
     .then((movie) => {
       if ((movie !== null) && ((movie.owner.toString() || '') === req.user._id)) {
-        Movie.findByIdAndRemove(req.params.movieId)
-          .then((movieDelete) => res.send(movieDelete));
-      } else if (movie === null) {
+        movie.remove();
+        res.send(movie);
+      }
+      if (movie === null) {
         throw new NotFoundError(`Нет фильма с id ${req.params.cardId}`);
       } else {
         throw new AccessError('Нельзя удалять фильмы, созданные другим пользователем');

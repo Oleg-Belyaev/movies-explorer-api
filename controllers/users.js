@@ -44,7 +44,12 @@ const createUser = (req, res, next) => {
       if (!user) {
         throw new ValidationError('Не корректные почта или пароль');
       }
-      res.send(user);
+      const { _id } = user;
+      res.send({
+        _id,
+        name,
+        email,
+      });
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {

@@ -32,9 +32,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/', router);
-app.use(errorLogger);
 app.use(notFoundErrorHandler);
 app.use(celebrateErrorHandler);
+app.use(errorLogger);
 app.use(errorHadler);
 
 app.listen(NODE_ENV === 'production' ? PORT : 3000);
